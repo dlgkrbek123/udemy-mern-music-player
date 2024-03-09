@@ -11,6 +11,16 @@ tailwind.config.js에 템플릿 경로 입력
 
 -------------------------------
 
+npm install express mongoose dotenv
+npm install -g nodemon 
 
+
+nodemon server
+
+-------------------------------
+
+Cluster - DataBase - Collection
+
+compass로 확인하면서 개발
 
 -------------------------------
