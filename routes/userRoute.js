@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
@@ -53,10 +54,9 @@ router.post('/login', async (req, res) => {
     const isPasswordMatched = bcrypt.compareSync(password, user.password);
 
     if (!isPasswordMatched) {
-      return res.status(200).send({
-        message: 'Password is incorrect',
-        success: false,
-      });
+      return res
+        .status(200)
+        .send({ message: 'Password is incorrect', success: false });
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
@@ -70,6 +70,24 @@ router.post('/login', async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({ message: error.message, success: false });
+  }
+});
+
+router.post('/get-user-data', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+
+    if (!user) {
+      return res.status(200).send({ message: '', success: false });
+    }
+
+    return res.status(200).send({
+      message: 'User data fetched successfully',
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).send({ message: error.message, success: false });
   }
 });
 
