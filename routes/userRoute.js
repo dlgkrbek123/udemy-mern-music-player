@@ -81,6 +81,8 @@ router.post('/get-user-data', authMiddleware, async (req, res) => {
       return res.status(200).send({ message: '', success: false });
     }
 
+    user.password = undefined;
+
     return res.status(200).send({
       message: 'User data fetched successfully',
       success: true,
