@@ -24,3 +24,9 @@ Cluster - DataBase - Collection
 compass로 확인하면서 개발
 
 -------------------------------
+
+npm install react-router-dom redux react-redux axios @reduxjs/toolkit
+
+input 공통 컴포넌트 안만들고 일단 index.css에 스타일링
+
+-------------------------------
