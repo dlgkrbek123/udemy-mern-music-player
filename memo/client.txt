@@ -1,0 +1,16 @@
+-------------------------------
+
+npx create-react-app client
+=> 폴더 생성
+
+
+npm install -D tailwindcss
+npx tailwindcss init
+
+tailwind.config.js에 템플릿 경로 입력
+
+-------------------------------
+
+
+
+-------------------------------
