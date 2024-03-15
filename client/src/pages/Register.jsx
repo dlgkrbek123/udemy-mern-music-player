@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { HideLoading, ShowLoading } from '../redux/alertSlice';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -9,18 +12,23 @@ const Register = () => {
     password: '',
   });
 
+  const dispatch = useDispatch();
+
   const register = async () => {
     try {
+      dispatch(ShowLoading());
       const response = await axios.post('/api/users/register', user);
+      dispatch(HideLoading());
 
       if (response.data.success) {
-        alert('success');
+        toast.success(response.data.message);
       } else {
-        alert(response.data.message);
+        toast.error(response.data.message);
       }
     } catch (error) {
+      toast.error('Something went wrong');
+      dispatch(HideLoading());
       console.log(error);
-      alert('catched');
     }
   };
 
