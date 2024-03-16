@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { SetUser } from '../redux/userSlice';
 import { ShowLoading, HideLoading } from '../redux/alertSlice';
+import DefaultLayout from './DefaultLayout';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -44,7 +45,7 @@ const ProtectedRoute = ({ children }) => {
     if (user === null) getUserData();
   }, []);
 
-  return readyToRender && children;
+  return readyToRender && <DefaultLayout>{children}</DefaultLayout>;
 };
 
 export default ProtectedRoute;
