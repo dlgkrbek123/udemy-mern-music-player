@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { SetCurrentSong } from '../redux/userSlice';
+import { SetCurrentSong, SetCurrentSongIndex } from '../redux/userSlice';
 
 const SongsList = ({ children }) => {
-  const allSongs = useSelector((state) => state.user.allSongs) ?? [];
+  const { allSongs = [], currentSong } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const handleClickSong = (song) => () => {
+  const handleClickSong = (song, index) => () => {
     dispatch(SetCurrentSong(song));
+    dispatch(SetCurrentSongIndex(index));
   };
 
   return (
@@ -16,11 +17,16 @@ const SongsList = ({ children }) => {
         type="text"
         placeholder="Song, Artist, Album"
       />
-      {allSongs.map((song) => {
+      {allSongs.map((song, index) => {
+        const isCurrentSong = currentSong?._id === song._id;
+
         return (
           <div
-            className="flex items-center justify-between"
-            onClick={handleClickSong(song)}
+            key={song._id}
+            className={`p-2 flex items-center justify-between cursor-pointer ${
+              isCurrentSong && 'shadow border border-gray-300 rounded'
+            }`}
+            onClick={handleClickSong(song, index)}
           >
             <div>
               <h1>{song.title}</h1>

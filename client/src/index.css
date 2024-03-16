@@ -25,3 +25,7 @@ input:focus {
   color: white;
   background: #d43c00;
 }
+
+i {
+  cursor: pointer;
+}
