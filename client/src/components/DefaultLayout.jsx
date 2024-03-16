@@ -20,7 +20,7 @@ const DefaultLayout = ({ children }) => {
           />
         </div>
       </div>
-      <div className="content">{children}</div>
+      <div className="m-10 content">{children}</div>
     </div>
   );
 };
