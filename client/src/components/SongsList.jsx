@@ -1,7 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { SetCurrentSong } from '../redux/userSlice';
 
 const SongsList = ({ children }) => {
   const allSongs = useSelector((state) => state.user.allSongs) ?? [];
+  const dispatch = useDispatch();
+
+  const handleClickSong = (song) => () => {
+    dispatch(SetCurrentSong(song));
+  };
 
   return (
     <div className="flex flex-col gap-5">
@@ -12,7 +18,10 @@ const SongsList = ({ children }) => {
       />
       {allSongs.map((song) => {
         return (
-          <div className="flex items-center justify-between">
+          <div
+            className="flex items-center justify-between"
+            onClick={handleClickSong(song)}
+          >
             <div>
               <h1>{song.title}</h1>
               <h1>

@@ -6,6 +6,7 @@ import { SetAllSongs } from '../redux/userSlice';
 import toast from 'react-hot-toast';
 import SongsList from '../components/SongsList';
 import PlayList from '../components/PlayList';
+import Player from '../components/Player';
 
 const Home = () => {
   const { user } = useSelector((state) => state.user);
@@ -39,15 +40,18 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex h-screen gap-5">
-      <div className="w-1/2">
-        <SongsList />
-      </div>
+    <>
+      <div className="flex gap-5">
+        <div className="w-1/2">
+          <SongsList />
+        </div>
 
-      <div className="w-1/2">
-        <PlayList />
+        <div className="w-1/2">
+          <PlayList />
+        </div>
       </div>
-    </div>
+      <Player />
+    </>
   );
 };
 

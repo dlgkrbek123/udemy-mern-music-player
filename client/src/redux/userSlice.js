@@ -5,6 +5,7 @@ export const userSlice = createSlice({
   initialState: {
     user: null,
     allSongs: [],
+    currentSong: null,
   },
   reducers: {
     SetUser: (state, action) => {
@@ -13,7 +14,10 @@ export const userSlice = createSlice({
     SetAllSongs: (state, action) => {
       state.allSongs = action.payload;
     },
+    SetCurrentSong: (state, action) => {
+      state.currentSong = action.payload;
+    },
   },
 });
 
-export const { SetUser, SetAllSongs } = userSlice.actions;
+export const { SetUser, SetAllSongs, SetCurrentSong } = userSlice.actions;
